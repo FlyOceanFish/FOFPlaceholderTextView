@@ -65,7 +65,7 @@ IB_DESIGNABLE
             NSString *aText = [self deleSpace:self.text];
             count = aText.length+text.length;
         }
-        if (count>self.maxWord) {
+        if (count>self.maxWord&&self.maxWord>0) {
             return NO;
         }
         if (self.showCountLabel) {
