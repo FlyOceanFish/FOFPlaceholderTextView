@@ -1,9 +1,8 @@
 //
-//  YTOPlaceholderTextFiled.h
-//  YtoStation
+//  FOFPlaceholderTextView.h
 //
-//  Created by YTO on 2017/12/18.
-//  Copyright © 2017年 yto. All rights reserved.
+//  Created by FlyOceanFish on 2017/12/18.
+//  Copyright © 2017年 FlyOceanFish. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
