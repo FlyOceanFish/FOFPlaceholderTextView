@@ -5,7 +5,7 @@
 //  Copyright © 2017年 FlyOceanFish. All rights reserved.
 //
 
-IB_DESIGNABLE
+//IB_DESIGNABLE
 
 #import "FOFPlaceholderTextView.h"
 
@@ -33,6 +33,9 @@ IB_DESIGNABLE
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if (self.fofDelegate&&[((NSObject *)self.fofDelegate) respondsToSelector:@selector(placeholderTextView:shouldChangeTextInRange:replacementText:)]) {
+        [self.fofDelegate placeholderTextView:self shouldChangeTextInRange:range replacementText:text];
+    }
     if (self.solidWord>0) {
         NSAssert(self.text.length>=self.solidWord, @"固定文字大小＜‘solidWord’");
     }
@@ -50,6 +53,9 @@ IB_DESIGNABLE
 
         }
     }else{
+        if (self.solidWord>0&&range.location<self.solidWord) {
+            return NO;
+        }
         if ([text isEqualToString:@" "]) {
             return YES;
         }
@@ -77,6 +83,9 @@ IB_DESIGNABLE
     return YES;
 }
 -(void)textViewDidChange:(UITextView *)textView{
+    if (self.fofDelegate&&[((NSObject *)self.fofDelegate) respondsToSelector:@selector(placeholderTextViewDidChange:)]) {
+        [self.fofDelegate placeholderTextViewDidChange:self];
+    }
     [self private_hideOrShow];
 }
 - (NSString *)deleSpace:(NSString *)text{
