@@ -40,23 +40,19 @@
     if (self.solidWord>0) {
         NSAssert(self.text.length>=self.solidWord, @"固定文字大小＜‘solidWord’");
     }
+    if (self.solidWord>0&&range.location<self.solidWord) {
+        return NO;
+    }
     if ([text isEqualToString:@""]) {
-        if (self.solidWord>0) {
-            if (range.location<self.solidWord) {
-                return NO;
-            }
-        }
+
         if (self.showCountLabel&&self.text.length) {
             NSAssert(self.maxWord>0, @"请设置文字最多个数!");
             if (![[self.text substringWithRange:range] isEqualToString:@" "]) {
-               self.countLabel.text = [NSString stringWithFormat:@"%@/%@",@([self deleSpace:self.text].length-1),@(self.maxWord)];
+                self.countLabel.text = [NSString stringWithFormat:@"%@/%@",@([self deleSpace:self.text].length-1),@(self.maxWord)];
             }
-
+            
         }
     }else{
-        if (self.solidWord>0&&range.location<self.solidWord) {
-            return NO;
-        }
         if ([text isEqualToString:@" "]) {
             return YES;
         }
@@ -72,6 +68,9 @@
             count = aText.length+text.length;
         }
         if (count>self.maxWord&&self.maxWord>0) {
+            if (self.fofDelegate&&[((NSObject *)self.fofDelegate) respondsToSelector:@selector(placeholderTextViewDidOverMax:)]) {
+                [self.fofDelegate placeholderTextViewDidOverMax:self];
+            }
             return NO;
         }
         if (self.showCountLabel) {

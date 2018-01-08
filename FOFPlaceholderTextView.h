@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)placeholderTextView:(FOFPlaceholderTextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text;
 
 -(void)placeholderTextViewDidChange:(FOFPlaceholderTextView *)textView;
+-(void)placeholderTextViewDidOverMax:(FOFPlaceholderTextView *)textView;
 @end
 
 @interface FOFPlaceholderTextView : UITextView
